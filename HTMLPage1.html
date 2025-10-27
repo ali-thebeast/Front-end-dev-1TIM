@@ -10,6 +10,7 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         html, body {
             margin: 0;
             padding: 0;
@@ -70,30 +71,14 @@
             animation: spiralIn 1.5s ease-out;
             border-radius: 50%;
             overflow: hidden;
-            /* Optional tuning knobs */
-            --logo-zoom: 1.10;
-            --logo-shift-x: 0%;
-            --logo-shift-y: 0%;
         }
 
             .logo-container img {
                 width: 100%;
                 height: 100%;
-                object-fit: cover; /* fills the circle */
-                object-position: var(--logo-shift-x) var(--logo-shift-y);
-                transform: scale(var(--logo-zoom)); /* push art to circle edge */
+                object-fit: cover;
                 filter: drop-shadow(0 0 30px rgba(255,255,255,0.5));
             }
-
-        /* If you use this class elsewhere, keep it minimal */
-        .round-photo {
-            border-radius: 50%;
-            object-fit: cover;
-            overflow: hidden;
-            --logo-zoom: 1.10;
-            --logo-shift-x: 0%;
-            --logo-shift-y: 0%;
-        }
 
         @keyframes spiralIn {
             0% {
@@ -161,12 +146,11 @@
 
         .nav-container {
             display: flex;
-            justify-content: center; /* center whole group */
+            justify-content: center;
             align-items: center;
             max-width: 1400px;
             margin: 0 auto;
-            gap: 60px; /* space between logo and links */
-            z-index: 5000;
+            gap: 60px;
         }
 
         .nav-logo {
@@ -182,7 +166,8 @@
         .nav-logo-img {
             width: 40px;
             height: 40px;
-            object-fit: contain;
+            object-fit: cover;
+            border-radius: 50%;
         }
 
         .nav-links {
@@ -190,8 +175,8 @@
             gap: 40px;
             list-style: none;
             align-items: center;
-            justify-content: center; /* center links */
-            flex-wrap: wrap; /* allow wrapping on small screens */
+            justify-content: center;
+            flex-wrap: wrap;
             flex: 1;
         }
 
@@ -223,15 +208,15 @@
                     .nav-links a:hover::after {
                         width: 100%;
                     }
-            /* --- Dropdown menus --- */
+
             .nav-links li {
-                position: relative; /* needed for absolute submenu positioning */
+                position: relative;
             }
 
         .dropdown-menu {
-            display: none; /* hidden by default */
+            display: none;
             position: absolute;
-            top: 100%; /* just below the parent link */
+            top: 100%;
             left: 0;
             background: #fff;
             border-radius: 10px;
@@ -256,17 +241,15 @@
                     color: #667eea;
                 }
 
-        /* Show the menu on hover */
         .dropdown:hover > .dropdown-menu {
             display: block;
         }
 
-        /* Optional: little animation */
         .dropdown-menu {
-            animation: fadeIn 0.25s ease;
+            animation: fadeInDropdown 0.25s ease;
         }
 
-        @keyframes fadeIn {
+        @keyframes fadeInDropdown {
             from {
                 opacity: 0;
                 transform: translateY(-5px);
@@ -277,22 +260,6 @@
                 transform: translateY(0);
             }
         }
-
-        /* Mobile tweak: make dropdowns tap-friendly */
-        @media (max-width: 768px) {
-            .dropdown-menu {
-                position: static;
-                box-shadow: none;
-                background: transparent;
-                padding: 0;
-            }
-
-                .dropdown-menu li a {
-                    padding: 8px 0 8px 12px;
-                    background: transparent;
-                }
-        }
-
 
         /* Hero Section */
         .hero {
@@ -389,7 +356,6 @@
             height: 120px;
             margin: 0 auto 40px;
             animation: pulse 2s infinite;
-            /* ensure circular clip here too */
             border-radius: 50%;
             overflow: hidden;
         }
@@ -397,7 +363,7 @@
             .hero-logo img {
                 width: 100%;
                 height: 100%;
-                object-fit: contain;
+                object-fit: cover;
             }
 
         @keyframes pulse {
@@ -454,7 +420,6 @@
             line-height: 1.8;
         }
 
-        /* Existing tablet rules */
         @media (max-width: 768px) {
             .welcome-text {
                 font-size: 2.5rem;
@@ -475,36 +440,30 @@
             .content-section {
                 padding: 50px 20px;
             }
-        }
 
-        /* Extra mobile-friendly tweaks */
-        /* --- Mobile: horizontal-scroll nav --- */
-        @media (max-width: 768px) {
             .nav-container {
                 gap: 12px;
             }
 
             .nav-links {
-                /* key bits */
                 width: 100%;
                 display: flex;
-                flex-wrap: nowrap; /* 🚫 no wrapping */
+                flex-wrap: nowrap;
                 justify-content: flex-start;
                 gap: 24px;
-                overflow-x: auto; /* ✅ horizontal scroll */
+                overflow-x: auto;
                 overflow-y: hidden;
                 white-space: nowrap;
-                -webkit-overflow-scrolling: touch; /* smooth iOS scrolling */
+                -webkit-overflow-scrolling: touch;
                 padding: 8px 6px;
-                margin: 0; /* remove any default margins */
+                margin: 0;
             }
 
                 .nav-links li {
-                    flex: 0 0 auto; /* keep items their natural width */
-                    scroll-snap-align: center; /* optional: nicer snapping feel */
+                    flex: 0 0 auto;
+                    scroll-snap-align: center;
                 }
 
-                /* optional: hide scrollbar chrome */
                 .nav-links::-webkit-scrollbar {
                     display: none;
                 }
@@ -512,6 +471,18 @@
             .nav-links {
                 scrollbar-width: none;
             }
+
+            .dropdown-menu {
+                position: static;
+                box-shadow: none;
+                background: transparent;
+                padding: 0;
+            }
+
+                .dropdown-menu li a {
+                    padding: 8px 0 8px 12px;
+                    background: transparent;
+                }
         }
     </style>
 </head>
@@ -521,8 +492,7 @@
         <div class="welcome-content">
             <div class="logo-container">
                 <img src="https://raw.githubusercontent.com/ali-thebeast/Front-end-dev-1TIM/main/LOGO.png"
-                     alt="1TIM Logo"
-                     class="round-photo" />
+                     alt="1TIM Logo" />
             </div>
             <div class="welcome-text">Welcome to 1TIM</div>
         </div>
@@ -562,7 +532,7 @@
             </div>
             <div class="hero-content">
                 <div class="hero-logo">
-                    <img src="https://raw.githubusercontent.com/ali-thebeast/Front-end-dev-1TIM/main/LOGO.png" alt="1TIM Logo" class="round-photo">
+                    <img src="https://raw.githubusercontent.com/ali-thebeast/Front-end-dev-1TIM/main/LOGO.png" alt="1TIM Logo">
                 </div>
                 <h1 class="hero-title">
                     YOUR TRUE BUSINESS PARTNER IN<br>
